@@ -213,7 +213,6 @@ const ScrollableTabView = createReactClass({
   },
 
   renderScrollableContent() {
-    if (Platform.OS === 'ios') {
       const scenes = this._composeScenes();
       return <Animated.ScrollView
         horizontal
@@ -238,42 +237,42 @@ const ScrollableTabView = createReactClass({
       >
           {scenes}
       </Animated.ScrollView>;
-    } else {
-      const scenes = this._composeScenes();
-      return <Animated.ScrollView
-        horizontal
-        pagingEnabled
-        automaticallyAdjustContentInsets={false}
-        contentOffset={{x: this.props.initialPage * this.state.containerWidth,}}
-        ref={(scrollView) => {
-          this.scrollView = scrollView;
-        }}
-        onScroll={Animated.event(
-          [{
-            nativeEvent: {
-              position: this.state.positionAndroid,
-              offset: this.state.offsetAndroid,
-            },
-          },],
-          {
-            useNativeDriver: true,
-            listener: this._onScroll,
-          },
-        )}
-        onMomentumScrollBegin={this._onMomentumScrollBeginAndEnd}
-        onMomentumScrollEnd={this._onMomentumScrollBeginAndEnd}
-        scrollEventThrottle={16}
-        scrollsToTop={false}
-        showsHorizontalScrollIndicator={false}
-        scrollEnabled={!this.props.locked}
-        directionalLockEnabled
-        alwaysBounceVertical={false}
-        keyboardDismissMode="on-drag"
-        {...this.props.contentProps}
-      >
-        {scenes}
-      </Animated.ScrollView>;
-    }
+    // } else {
+    //   const scenes = this._composeScenes();
+    //   return <Animated.ScrollView
+    //     horizontal
+    //     pagingEnabled
+    //     automaticallyAdjustContentInsets={false}
+    //     contentOffset={{x: this.props.initialPage * this.state.containerWidth,}}
+    //     ref={(scrollView) => {
+    //       this.scrollView = scrollView;
+    //     }}
+    //     onScroll={Animated.event(
+    //       [{
+    //         nativeEvent: {
+    //           position: this.state.positionAndroid,
+    //           offset: this.state.offsetAndroid,
+    //         },
+    //       },],
+    //       {
+    //         useNativeDriver: true,
+    //         listener: this._onScroll,
+    //       },
+    //     )}
+    //     onMomentumScrollBegin={this._onMomentumScrollBeginAndEnd}
+    //     onMomentumScrollEnd={this._onMomentumScrollBeginAndEnd}
+    //     scrollEventThrottle={16}
+    //     scrollsToTop={false}
+    //     showsHorizontalScrollIndicator={false}
+    //     scrollEnabled={!this.props.locked}
+    //     directionalLockEnabled
+    //     alwaysBounceVertical={false}
+    //     keyboardDismissMode="on-drag"
+    //     {...this.props.contentProps}
+    //   >
+    //     {scenes}
+    //   </Animated.ScrollView>;
+    // }
     //   return <AnimatedViewPagerAndroid
     //     key={this._children().length}
     //     style={styles.scrollableContentAndroid}
